@@ -15,6 +15,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 
 
@@ -31,6 +33,7 @@ public class ReturnRecord {
 	private String originalZoroOrderId;
 	
 	private String returnAuthorizationNumber;
+	
 	@Column(nullable = false)
 	private String approvedBy;
 	@Column(nullable = false)
@@ -79,7 +82,114 @@ public class ReturnRecord {
 	  public ReturnRecord() {
 		  
 	  }
+
+	  public Long getId() {
+		  return id;
+	  }
+
+	  public void setId(Long id) {
+		  this.id = id;
+	  }
+
+	  public String getAmazonOrderId() {
+		  return amazonOrderId;
+	  }
+
+	  public void setAmazonOrderId(String amazonOrderId) {
+		  this.amazonOrderId = amazonOrderId;
+	  }
+
+	  public String getOriginalZoroOrderId() {
+		  return originalZoroOrderId;
+	  }
+
+	  public void setOriginalZoroOrderId(String originalZoroOrderId) {
+		  this.originalZoroOrderId = originalZoroOrderId;
+	  }
+
+	  public String getReturnAuthorizationNumber() {
+		  return returnAuthorizationNumber;
+	  }
+
+	  public void setReturnAuthorizationNumber(String returnAuthorizationNumber) {
+		  this.returnAuthorizationNumber = returnAuthorizationNumber;
+	  }
+
+	  public String getApprovedBy() {
+		  return approvedBy;
+	  }
+
+	  public void setApprovedBy(String approvedBy) {
+		  this.approvedBy = approvedBy;
+	  }
+
+	  public Integer getQuantity() {
+		  return quantity;
+	  }
+
+	  public void setQuantity(Integer quantity) {
+		  this.quantity = quantity;
+	  }
+
+	  public ResolutionType getResolutionType() {
+		  return resolutionType;
+	  }
+
+	  public void setResolutionType(ResolutionType resolutionType) {
+		  this.resolutionType = resolutionType;
+	  }
+
+	  public ReturnRecordStatus getStatus() {
+		  return status;
+	  }
+
+	  public void setStatus(ReturnRecordStatus status) {
+		  this.status = status;
+	  }
+
+	  public LocalDateTime getCreatedAt() {
+		  return createdAt;
+	  }
+
+	  public void setCreatedAt(LocalDateTime createdAt) {
+		  this.createdAt = createdAt;
+	  }
+
+	  public LocalDateTime getUpdatedAt() {
+		  return updatedAt;
+	  }
+
+	  public void setUpdatedAt(LocalDateTime updatedAt) {
+		  this.updatedAt = updatedAt;
+	  }
+
+	  public Address getFromAddress() {
+		  return fromAddress;
+	  }
+
+	  public void setFromAddress(Address fromAddress) {
+		  this.fromAddress = fromAddress;
+	  }
+
+	  public Address getToAddress() {
+		  return toAddress;
+	  }
+
+	  public void setToAddress(Address toAddress) {
+		  this.toAddress = toAddress;
+	  }
 	  
+	  
+	  @PrePersist
+	  public void prePersist() {
+		  this.createdAt = LocalDateTime.now();
+		  this.updatedAt = LocalDateTime.now();
+	  }
+	  
+	  @PreUpdate
+	  public void preUpdate() {
+		  this.updatedAt = LocalDateTime.now();
+	  }
 	
 	
 
