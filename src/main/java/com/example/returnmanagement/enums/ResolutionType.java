@@ -1,6 +1,6 @@
 package com.example.returnmanagement.enums;
 
-public enum ResoultionType {
+public enum ResolutionType {
 	REFUND,
 	REPLACEMENT
 }
