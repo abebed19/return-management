@@ -14,9 +14,6 @@ public class ReturnRecordController {
 	public  ReturnRecordController(ReturnRecordService returnRecordService) {
 		this.returnRecordService = returnRecordService;
 	}
-	
-	
-	
-	
+
 
 }
