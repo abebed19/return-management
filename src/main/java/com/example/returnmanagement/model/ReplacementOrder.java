@@ -124,6 +124,8 @@ public class ReplacementOrder {
 	}
 	@PrePersist
 	public void prePersist() {
-		this.processedAt  = LocalDateTime.now();
+		if(this.processedAt == null)
+			this.processedAt  = LocalDateTime.now();
+		
 	}
 }
