@@ -32,7 +32,7 @@ public class Note {
 	
 	
 	@Column(nullable = false)
-	public Long targetId;
+	private Long targetId;
 	
 	public Note() {
 		
