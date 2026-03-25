@@ -1,11 +1,14 @@
 package com.example.returnmanagement.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.example.returnmanagement.enums.ReplacementOrderStatus;
 
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -15,7 +18,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
 @Entity
@@ -29,7 +34,7 @@ public class ReplacementOrder {
 	@Column(nullable = false,updatable = false)
 	private LocalDateTime processedAt;
 	@Column(nullable = false)
-	private Long replacedQuantity;
+	private Integer replacedQuantity;
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	private ReplacementOrderStatus status;
@@ -64,6 +69,8 @@ public class ReplacementOrder {
 	@OneToOne(optional = false)
 	@JoinColumn(name ="return_record_id",nullable = false, unique = true)
 	private ReturnRecord returnRecord;
+	@OneToMany(mappedBy ="replacementOrder", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<ReplacementShipment> shipments  = new ArrayList<>();
 	public ReplacementOrder() {
 		
 	}
@@ -85,10 +92,10 @@ public class ReplacementOrder {
 	public void setProcessedAt(LocalDateTime processedAt) {
 		this.processedAt = processedAt;
 	}
-	public Long getReplacedQuantity() {
+	public Integer getReplacedQuantity() {
 		return replacedQuantity;
 	}
-	public void setReplacedQuantity(Long replacedQuantity) {
+	public void setReplacedQuantity(Integer replacedQuantity) {
 		this.replacedQuantity = replacedQuantity;
 	}
 	public ReplacementOrderStatus getStatus() {
@@ -115,8 +122,8 @@ public class ReplacementOrder {
 	public void setReturnRecord(ReturnRecord returnRecord) {
 		this.returnRecord = returnRecord;
 	}
-	
-	
-	
-
+	@PrePersist
+	public void prePersist() {
+		this.processedAt  = LocalDateTime.now();
+	}
 }

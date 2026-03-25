@@ -19,6 +19,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -84,6 +85,10 @@ public class ReturnRecord {
 	        @AttributeOverride(name = "country", column = @Column(name = "to_country"))
 	    })
 	    private Address toAddress;
+	  
+	  
+	  @OneToOne(mappedBy = "returnRecord",cascade = CascadeType.ALL,orphanRemoval = true)
+	  private ReplacementOrder replacementOrder;
 	  
 	  public ReturnRecord() {
 		  
