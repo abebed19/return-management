@@ -1,12 +1,15 @@
 package com.example.returnmanagement.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.example.returnmanagement.enums.ResolutionType;
 import com.example.returnmanagement.enums.ReturnRecordStatus;
 
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -15,6 +18,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -37,7 +41,7 @@ public class ReturnRecord {
 	@Column(nullable = false)
 	private String approvedBy;
 	@Column(nullable = false)
-	private Integer quantity ;
+	private Integer returnedQuantity ;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
@@ -50,6 +54,8 @@ public class ReturnRecord {
 	@Column(nullable = false, updatable = false)
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
+	@OneToMany(mappedBy = "returnRecord",cascade = CascadeType.ALL,orphanRemoval = true)
+	private List<ReturnShipment> shipments = new ArrayList<>();
 	
 	@Embedded
     @AttributeOverrides({
@@ -124,11 +130,11 @@ public class ReturnRecord {
 	  }
 
 	  public Integer getQuantity() {
-		  return quantity;
+		  return returnedQuantity;
 	  }
 
 	  public void setQuantity(Integer quantity) {
-		  this.quantity = quantity;
+		  this.returnedQuantity = quantity;
 	  }
 
 	  public ResolutionType getResolutionType() {

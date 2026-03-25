@@ -3,7 +3,7 @@ package com.example.returnmanagement.enums;
 public enum ShipmentStatus {
 	
 	LABEL_CREATED,
-	INTRANSIT,
+	IN_TRANSIT,
 	DAMAGED_IN_TRANSIT,
 	DELIVERY_EXCEPTION,
 	DELIVERED
