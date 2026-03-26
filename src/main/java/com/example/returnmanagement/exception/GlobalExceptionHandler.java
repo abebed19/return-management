@@ -12,12 +12,12 @@ public class GlobalExceptionHandler {
 	
 	@ExceptionHandler(RuntimeException.class)
 	public ResponseEntity<ErrorResponseDto> handleNullPointerException(RuntimeException ex) {
-		
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponseDto(ex.getMessage(),HttpStatus.BAD_REQUEST.value()));	
+	}
+	
+	@ExceptionHandler(ReturnRecordNotFound.class)
+	public ResponseEntity<ErrorResponseDto> handlReturnRecordNotFoundException(ReturnRecordNotFound ex){
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponseDto(ex.getMessage(),HttpStatus.BAD_REQUEST.value()));
-		
-		
-		
-		
 	}
 
 }

@@ -2,6 +2,8 @@ package com.example.returnmanagement.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,8 +27,12 @@ public class ReturnRecordController {
 	public ResponseEntity<ReturnRecordResponse> createReturnRecord(@RequestBody CreateReturnRecordRequest returnRecordRequest){
 		
 		ReturnRecordResponse returnRecordResponse = returnRecordService.createReturnRecord(returnRecordRequest);
-		
 		return ResponseEntity.status(HttpStatus.CREATED).body(returnRecordResponse);
+	}
+	@GetMapping("/{id}")
+	public ResponseEntity<ReturnRecordResponse> findReturnRecordById(@PathVariable Long id){
+		
+		return ResponseEntity.status(HttpStatus.OK).body(returnRecordService.findReturnRecordById(id));
 		
 	}
 

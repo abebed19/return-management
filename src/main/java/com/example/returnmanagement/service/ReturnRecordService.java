@@ -15,6 +15,7 @@ import com.example.returnmanagement.model.ReplacementOrder;
 import com.example.returnmanagement.model.ReturnRecord;
 import com.example.returnmanagement.model.ReturnShipment;
 import com.example.returnmanagement.repository.ReturnRecordRepository;
+import com.example.returnmanagement.exception.ReturnRecordNotFound;
 
 @Service
 public class ReturnRecordService {
@@ -30,6 +31,13 @@ public class ReturnRecordService {
 		ReturnRecord  saved = returnRecordRepository.save(returnRecord);
 		ReturnRecordResponse response =mapToReturnRecordResponse(saved);
 		return response;
+	}
+	
+	
+	public ReturnRecordResponse findReturnRecordById(Long id) {
+		ReturnRecord  returnRecord = returnRecordRepository.findById(id)
+				                     .orElseThrow(()->new ReturnRecordNotFound("Return record with "+ id+" not found"));
+		return mapToReturnRecordResponse(returnRecord);
 	}
 	
 	
