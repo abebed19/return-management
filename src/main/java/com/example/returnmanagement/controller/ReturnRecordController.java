@@ -15,7 +15,7 @@ import com.example.returnmanagement.service.ReturnRecordService;
 @RequestMapping("/api/returns")
 public class ReturnRecordController {
 	
-	private ReturnRecordService returnRecordService;
+	private final ReturnRecordService returnRecordService;
 	
 	public  ReturnRecordController(ReturnRecordService returnRecordService) {
 		this.returnRecordService = returnRecordService;

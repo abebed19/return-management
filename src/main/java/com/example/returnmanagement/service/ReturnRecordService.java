@@ -19,7 +19,7 @@ import com.example.returnmanagement.repository.ReturnRecordRepository;
 @Service
 public class ReturnRecordService {
 	
-	private ReturnRecordRepository returnRecordRepository;
+	private final ReturnRecordRepository returnRecordRepository;
 	
 	public ReturnRecordService(ReturnRecordRepository returnRecordRepository) {
 		this.returnRecordRepository = returnRecordRepository;
@@ -60,9 +60,7 @@ public class ReturnRecordService {
 				returnRecord.getCreatedAt(),
 				returnRecord.getUpdatedAt(),
 				toAddressDto(returnRecord.getFromAddress()),
-				toAddressDto(returnRecord.getToAddress()),
-				toReturnShipmentDto(returnRecord.getShipments()),
-				toReplacementOrderDto(returnRecord.getReplacementOrder())
+				toAddressDto(returnRecord.getToAddress())
 		);
 	}
  

@@ -18,7 +18,6 @@ public record ReturnRecordResponse(
 		LocalDateTime createdAt,
 		LocalDateTime updatedAt,
 		AddressDto fromAddress,
-		AddressDto toAddress,
-		List<ReturnShipmentDto> shipments,
-		ReplacementOrderDto replacementOrder
+		AddressDto toAddress
+	
 		) {}
