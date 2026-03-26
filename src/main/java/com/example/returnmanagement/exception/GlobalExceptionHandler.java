@@ -17,7 +17,7 @@ public class GlobalExceptionHandler {
 	
 	@ExceptionHandler(ReturnRecordNotFound.class)
 	public ResponseEntity<ErrorResponseDto> handlReturnRecordNotFoundException(ReturnRecordNotFound ex){
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponseDto(ex.getMessage(),HttpStatus.BAD_REQUEST.value()));
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponseDto(ex.getMessage(),HttpStatus.NOT_FOUND.value()));
 	}
 
 }
