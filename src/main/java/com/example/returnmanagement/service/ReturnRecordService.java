@@ -7,9 +7,11 @@ import org.springframework.stereotype.Service;
 
 import com.example.returnmanagement.dto.AddressDto;
 import com.example.returnmanagement.dto.CreateReturnRecordRequest;
+import com.example.returnmanagement.dto.ReplacementOrderDto;
 import com.example.returnmanagement.dto.ReturnRecordResponse;
 import com.example.returnmanagement.dto.ReturnShipmentDto;
 import com.example.returnmanagement.model.Address;
+import com.example.returnmanagement.model.ReplacementOrder;
 import com.example.returnmanagement.model.ReturnRecord;
 import com.example.returnmanagement.model.ReturnShipment;
 import com.example.returnmanagement.repository.ReturnRecordRepository;
@@ -60,7 +62,7 @@ public class ReturnRecordService {
 				toAddressDto(returnRecord.getFromAddress()),
 				toAddressDto(returnRecord.getToAddress()),
 				toReturnShipmentDto(returnRecord.getShipments()),
-				returnRecord.getReplacementOrder()
+				toReplacementOrderDto(returnRecord.getReplacementOrder())
 		);
 	}
  
@@ -95,6 +97,7 @@ public class ReturnRecordService {
      
     public List<ReturnShipmentDto> toReturnShipmentDto(List<ReturnShipment> shipmentEntity) {
     	List<ReturnShipmentDto> returnshipments= new ArrayList<>();
+  
     	for(ReturnShipment shipment : shipmentEntity) {
     		returnshipments.add(new ReturnShipmentDto(
     				shipment.getTrackingNumber(),
@@ -104,9 +107,20 @@ public class ReturnRecordService {
     				shipment.getDeliveredAt(),
     				shipment.getStatus()));
     	}
-    	
     	return returnshipments;
     }
     
     
+    public ReplacementOrderDto toReplacementOrderDto(ReplacementOrder order) {
+    	
+      return new ReplacementOrderDto(
+    		    order.getId(),
+    		    order.getReplacementZoroOrderNumber(),
+    		    order.getProcessedAt(),
+    		    order.getReplacedQuantity(),
+    		    order.getStatus(),
+    		    toAddressDto(order.getFromAddress()),
+    		    toAddressDto(order.getToAddress()));
+    		  
+    }
 }

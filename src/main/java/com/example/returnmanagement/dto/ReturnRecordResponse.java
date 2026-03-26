@@ -23,5 +23,5 @@ public record ReturnRecordResponse(
 		AddressDto fromAddress,
 		AddressDto toAddress,
 		List<ReturnShipmentDto> shipments,
-		ReplacementOrder replacementOrder
+		ReplacementOrderDto replacementOrder
 		) {}
