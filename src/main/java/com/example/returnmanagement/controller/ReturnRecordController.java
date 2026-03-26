@@ -1,5 +1,7 @@
 package com.example.returnmanagement.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,10 +32,16 @@ public class ReturnRecordController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(returnRecordResponse);
 	}
 	@GetMapping("/{id}")
-	public ResponseEntity<ReturnRecordResponse> findReturnRecordById(@PathVariable Long id){
+	public ResponseEntity<ReturnRecordResponse> getReturnRecordById(@PathVariable Long id){
 		
 		return ResponseEntity.status(HttpStatus.OK).body(returnRecordService.findReturnRecordById(id));
 		
+	}
+	@GetMapping
+	public ResponseEntity<List<ReturnRecordResponse>> getAllReturnRecords(){
+		
+		return ResponseEntity.status(HttpStatus.OK).body(this.returnRecordService.findReturnRecords());
+	
 	}
 
 

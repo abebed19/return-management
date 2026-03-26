@@ -36,10 +36,17 @@ public class ReturnRecordService {
 	
 	public ReturnRecordResponse findReturnRecordById(Long id) {
 		ReturnRecord  returnRecord = returnRecordRepository.findById(id)
-				                     .orElseThrow(()->new ReturnRecordNotFound("Return record with "+ id+" not found"));
+				                     .orElseThrow(()->new ReturnRecordNotFound("Return record with id "+ id+" not found"));
 		return mapToReturnRecordResponse(returnRecord);
 	}
 	
+	public List<ReturnRecordResponse> findReturnRecords(){
+		List<ReturnRecordResponse> records = returnRecordRepository.findAll()
+				                             .stream()
+				                             .map(returnRecord ->mapToReturnRecordResponse(returnRecord))
+				                             .toList();
+		return records;
+	}
 	
 	private ReturnRecord mapToEntity(CreateReturnRecordRequest returnRecordRequest) {
 		ReturnRecord rr = new ReturnRecord();
