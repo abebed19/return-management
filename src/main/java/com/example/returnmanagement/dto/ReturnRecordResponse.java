@@ -1,7 +1,6 @@
 package com.example.returnmanagement.dto;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import com.example.returnmanagement.enums.ResolutionType;
 import com.example.returnmanagement.enums.ReturnRecordStatus;

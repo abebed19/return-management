@@ -41,7 +41,7 @@ public class ReturnRecordService {
 		rr.setFromAddress(toAddressEntity(returnRecordRequest.fromAddress()));
 		rr.setResolutionType(returnRecordRequest.resolutionType());
 		rr.setReturnAuthorizationNumber(returnRecordRequest.returnAuthorizationNumber());
-		rr.setQuantity(returnRecordRequest.returnedQuantity());
+		rr.setReturnedQuantity(returnRecordRequest.returnedQuantity());
 		rr.setStatus(returnRecordRequest.status());
 		rr.setToAddress(toAddressEntity(returnRecordRequest.toAddress()));
 		return rr;
@@ -54,7 +54,7 @@ public class ReturnRecordService {
 				returnRecord.getOriginalZoroOrderId(),
 				returnRecord.getReturnAuthorizationNumber(),
 				returnRecord.getApprovedBy(),
-				returnRecord.getQuantity(),
+				returnRecord.getReturnedQuantity(),
 				returnRecord.getResolutionType(),
 				returnRecord.getStatus(),
 				returnRecord.getCreatedAt(),

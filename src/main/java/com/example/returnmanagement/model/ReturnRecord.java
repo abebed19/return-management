@@ -133,15 +133,6 @@ public class ReturnRecord {
 	  public void setApprovedBy(String approvedBy) {
 		  this.approvedBy = approvedBy;
 	  }
-
-	  public Integer getQuantity() {
-		  return returnedQuantity;
-	  }
-
-	  public void setQuantity(Integer quantity) {
-		  this.returnedQuantity = quantity;
-	  }
-
 	  public ResolutionType getResolutionType() {
 		  return resolutionType;
 	  }
