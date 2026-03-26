@@ -191,6 +191,31 @@ public class ReturnRecord {
 	  }
 	  
 	  
+	  
+	  public Integer getReturnedQuantity() {
+		return returnedQuantity;
+	}
+
+	  public void setReturnedQuantity(Integer returnedQuantity) {
+		  this.returnedQuantity = returnedQuantity;
+	  }
+
+	  public List<ReturnShipment> getShipments() {
+		  return shipments;
+	  }
+
+	  public void setShipments(List<ReturnShipment> shipments) {
+		  this.shipments = shipments;
+	  }
+
+	  public ReplacementOrder getReplacementOrder() {
+		  return replacementOrder;
+	  }
+
+	  public void setReplacementOrder(ReplacementOrder replacementOrder) {
+		  this.replacementOrder = replacementOrder;
+	  }
+
 	  @PrePersist
 	  public void prePersist() {
 		  this.createdAt = LocalDateTime.now();

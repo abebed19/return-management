@@ -20,8 +20,8 @@ public record ReturnRecordResponse(
 		ReturnRecordStatus status,
 		LocalDateTime createdAt,
 		LocalDateTime updatedAt,
-		Address fromAddress,
-		Address toAddress,
-		List<ReturnShipment> shipments,
+		AddressDto fromAddress,
+		AddressDto toAddress,
+		List<ReturnShipmentDto> shipments,
 		ReplacementOrder replacementOrder
 		) {}
