@@ -2,7 +2,6 @@ package com.example.returnmanagement.dto;
 
 import com.example.returnmanagement.enums.ResolutionType;
 import com.example.returnmanagement.enums.ReturnRecordStatus;
-import com.example.returnmanagement.model.Address;
 
 public record CreateReturnRecordRequest(
 		String amazonOrderId,

@@ -5,10 +5,7 @@ import java.util.List;
 
 import com.example.returnmanagement.enums.ResolutionType;
 import com.example.returnmanagement.enums.ReturnRecordStatus;
-import com.example.returnmanagement.model.Address;
-import com.example.returnmanagement.model.ReplacementOrder;
-import com.example.returnmanagement.model.ReturnShipment;
-
+ 
 public record ReturnRecordResponse(
 		long id,
 		String amazonOrderId,

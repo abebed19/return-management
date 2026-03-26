@@ -33,7 +33,7 @@ public class ReturnRecordService {
 	}
 	
 	
-	public ReturnRecord mapToEntity(CreateReturnRecordRequest returnRecordRequest) {
+	private ReturnRecord mapToEntity(CreateReturnRecordRequest returnRecordRequest) {
 		ReturnRecord rr = new ReturnRecord();
 		rr.setAmazonOrderId(returnRecordRequest.amazonOrderId());
 		rr.setOriginalZoroOrderId(returnRecordRequest.originalZoroOrderId());
@@ -47,7 +47,7 @@ public class ReturnRecordService {
 		return rr;
 	}
 	
- public ReturnRecordResponse mapToReturnRecordResponse(ReturnRecord returnRecord) {
+  private ReturnRecordResponse mapToReturnRecordResponse(ReturnRecord returnRecord) {
 		return new ReturnRecordResponse(
 				returnRecord.getId(),
 				returnRecord.getAmazonOrderId(),
@@ -66,7 +66,7 @@ public class ReturnRecordService {
 		);
 	}
  
-     public Address toAddressEntity(AddressDto addressDto) {
+     private Address toAddressEntity(AddressDto addressDto) {
     	 
     	 Address address  = new Address();
     	 address.setFullName(addressDto.fullName());
@@ -80,7 +80,7 @@ public class ReturnRecordService {
     	 address.setCountry(addressDto.country());
     	 return address;
      }
-     public AddressDto  toAddressDto(Address address)
+     private AddressDto  toAddressDto(Address address)
      {
     	 return new AddressDto(
     			 address.getFullName(),
@@ -95,7 +95,7 @@ public class ReturnRecordService {
     			 
      }
      
-    public List<ReturnShipmentDto> toReturnShipmentDto(List<ReturnShipment> shipmentEntity) {
+    private List<ReturnShipmentDto> toReturnShipmentDto(List<ReturnShipment> shipmentEntity) {
     	List<ReturnShipmentDto> returnshipments= new ArrayList<>();
   
     	for(ReturnShipment shipment : shipmentEntity) {
@@ -111,7 +111,7 @@ public class ReturnRecordService {
     }
     
     
-    public ReplacementOrderDto toReplacementOrderDto(ReplacementOrder order) {
+    private ReplacementOrderDto toReplacementOrderDto(ReplacementOrder order) {
     	
       return new ReplacementOrderDto(
     		    order.getId(),
