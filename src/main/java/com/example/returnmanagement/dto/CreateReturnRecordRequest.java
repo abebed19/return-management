@@ -10,15 +10,21 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 public record CreateReturnRecordRequest(
-		@NotBlank(message = "Amazon order id is required") String amazonOrderId,
-		@NotBlank(message = "Zoro order id is empty") String originalZoroOrderId,
-		@NotBlank(message = "Return authorization number is required") String returnAuthorizationNumber,
-		@NotBlank(message = "Approved by is required") String approvedBy,
+		@NotBlank(message = "Amazon order id is required")
+		String amazonOrderId,
+		@NotBlank(message = "Zoro order id is empty") 
+		String originalZoroOrderId,
+		@NotBlank(message = "Return authorization number is required")
+		String returnAuthorizationNumber,
+		@NotBlank(message = "Approved by is required")
+		String approvedBy,
 		@Positive(message ="Quantity must be greater than 0")
-		@Min(1)
-		@NotNull (message = "Return quantity is required") Integer returnedQuantity,
-		@NotNull(message = "Resoultion type must be given")ResolutionType resolutionType,
-		@NotNull(message = "Current return record status must be know") ReturnRecordStatus status,
+		@NotNull (message = "Return quantity is required")
+		Integer returnedQuantity,
+		@NotNull(message = "Resoultion type must be given")
+		ResolutionType resolutionType,
+		@NotNull(message = "Current return record status must be know") 
+		ReturnRecordStatus status,
 		@Valid
 		@NotNull(message = "From Address is required")
 		AddressDto fromAddress,
