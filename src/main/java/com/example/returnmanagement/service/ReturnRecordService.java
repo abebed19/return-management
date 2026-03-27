@@ -60,7 +60,7 @@ public class ReturnRecordService {
 		old.setFromAddress(forUpdate.getFromAddress());
 		old.setToAddress(forUpdate.getToAddress());
 		old.setOriginalZoroOrderId(forUpdate.getOriginalZoroOrderId());
-		old.setResolutionType(old.getResolutionType());
+		old.setResolutionType(forUpdate.getResolutionType());
 		old.setStatus(forUpdate.getStatus());
 		old.setReturnAuthorizationNumber(forUpdate.getReturnAuthorizationNumber());
 		old.setReturnedQuantity(forUpdate.getReturnedQuantity());

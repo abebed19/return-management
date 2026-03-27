@@ -60,7 +60,7 @@ public class ReturnRecordController {
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<ReturnRecordResponse> updateReturnRecord(@PathVariable Long id,@Valid @RequestBody CreateReturnRecordRequest returnRecord){
-		
+		return ResponseEntity.ok(returnRecordService.updateReturnRecord(id, returnRecord));
 	}
 
 
