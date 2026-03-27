@@ -15,6 +15,8 @@ import com.example.returnmanagement.dto.CreateReturnRecordRequest;
 import com.example.returnmanagement.dto.ReturnRecordResponse;
 import com.example.returnmanagement.service.ReturnRecordService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/returns")
 public class ReturnRecordController {
@@ -26,7 +28,7 @@ public class ReturnRecordController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<ReturnRecordResponse> createReturnRecord(@RequestBody CreateReturnRecordRequest returnRecordRequest){
+	public ResponseEntity<ReturnRecordResponse> createReturnRecord(@Valid @RequestBody CreateReturnRecordRequest returnRecordRequest){
 		
 		ReturnRecordResponse returnRecordResponse = returnRecordService.createReturnRecord(returnRecordRequest);
 		return ResponseEntity.status(HttpStatus.CREATED).body(returnRecordResponse);
@@ -34,7 +36,7 @@ public class ReturnRecordController {
 	@GetMapping("/{id}")
 	public ResponseEntity<ReturnRecordResponse> getReturnRecordById(@PathVariable Long id){
 		
-		return ResponseEntity.status(HttpStatus.OK).body(returnRecordService.findReturnRecordById(id));
+		return ResponseEntity.ok(returnRecordService.findReturnRecordById(id));
 		
 	}
 	@GetMapping
