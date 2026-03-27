@@ -42,19 +42,10 @@ public class ReturnRecordService {
 	}
 	
 	public List<ReturnRecordResponse> findReturnRecords(ReturnRecordStatus status){
-		List<ReturnRecordResponse> records = new ArrayList<>();
-		if(status== null) {
-			 records = returnRecordRepository.findAll()
-                     .stream()
-                     .map(returnRecord ->mapToReturnRecordResponse(returnRecord))
-                     .toList();
-		}else {
-			 records = returnRecordRepository.findByStatus(status)
-					  .stream()
-					  .map(returnRecord ->mapToReturnRecordResponse(returnRecord))
-					  .toList();
-		}
-		return records;
+	
+		return (status == null?returnRecordRepository.findAll() :returnRecordRepository.findByStatus(status)).stream()
+				.map(this::mapToReturnRecordResponse)
+				.toList();
 	}
 	
 	private ReturnRecord mapToEntity(CreateReturnRecordRequest returnRecordRequest) {
