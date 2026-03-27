@@ -3,6 +3,7 @@ package com.example.returnmanagement.dto;
 import com.example.returnmanagement.enums.ResolutionType;
 import com.example.returnmanagement.enums.ReturnRecordStatus;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -18,7 +19,11 @@ public record CreateReturnRecordRequest(
 		@NotNull (message = "Return quantity is required") Integer returnedQuantity,
 		@NotNull(message = "Resoultion type must be given")ResolutionType resolutionType,
 		@NotNull(message = "Current return record status must be know") ReturnRecordStatus status,
+		@Valid
+		@NotNull(message = "From Address is required")
 		AddressDto fromAddress,
+		@Valid
+		@NotNull(message ="To address is required")
 		AddressDto toAddress
 		
 ) {}
