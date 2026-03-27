@@ -43,10 +43,10 @@ public class ReturnRecordController {
 	}
 	@GetMapping
 	public ResponseEntity<List<ReturnRecordResponse>> getAllReturnRecords(
-			@RequestParam(required = false) ReturnRecordStatus status
+			 @RequestParam(required = false) ReturnRecordStatus status
 			){
 		
-		return ResponseEntity.status(HttpStatus.OK).body(this.returnRecordService.findReturnRecords(status));
+		return ResponseEntity.ok(this.returnRecordService.findReturnRecords(status));
 	
 	}
 
