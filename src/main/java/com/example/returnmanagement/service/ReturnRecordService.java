@@ -34,6 +34,9 @@ public class ReturnRecordService {
 		return response;
 	}
 	
+    public void deleteReturnRecord(Long id) {
+    	this.returnRecordRepository.deleteById(id);
+    }
 	
 	public ReturnRecordResponse findReturnRecordById(Long id) {
 		ReturnRecord  returnRecord = returnRecordRepository.findById(id)
@@ -46,6 +49,23 @@ public class ReturnRecordService {
 		return (status == null?returnRecordRepository.findAll() :returnRecordRepository.findByStatus(status)).stream()
 				.map(this::mapToReturnRecordResponse)
 				.toList();
+	}
+	
+	public ReturnRecordResponse updateReturnRecord(Long id, CreateReturnRecordRequest returnrecordRequest) {
+		ReturnRecord forUpdate = mapToEntity(returnrecordRequest);
+		ReturnRecord old = returnRecordRepository.findById(id)
+				           .orElseThrow(()->new ReturnRecordNotFound("Return record with id "+ id +" not found to update"));
+		old.setAmazonOrderId(forUpdate.getAmazonOrderId());
+		old.setApprovedBy(forUpdate.getApprovedBy());
+		old.setFromAddress(forUpdate.getFromAddress());
+		old.setToAddress(forUpdate.getToAddress());
+		old.setOriginalZoroOrderId(forUpdate.getOriginalZoroOrderId());
+		old.setResolutionType(old.getResolutionType());
+		old.setStatus(forUpdate.getStatus());
+		old.setReturnAuthorizationNumber(forUpdate.getReturnAuthorizationNumber());
+		old.setReturnedQuantity(forUpdate.getReturnedQuantity());
+		
+		return mapToReturnRecordResponse(returnRecordRepository.save(old))
 	}
 	
 	private ReturnRecord mapToEntity(CreateReturnRecordRequest returnRecordRequest) {
