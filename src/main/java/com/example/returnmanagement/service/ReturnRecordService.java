@@ -10,6 +10,7 @@ import com.example.returnmanagement.dto.CreateReturnRecordRequest;
 import com.example.returnmanagement.dto.ReplacementOrderDto;
 import com.example.returnmanagement.dto.ReturnRecordResponse;
 import com.example.returnmanagement.dto.ReturnShipmentDto;
+import com.example.returnmanagement.enums.ReturnRecordStatus;
 import com.example.returnmanagement.model.Address;
 import com.example.returnmanagement.model.ReplacementOrder;
 import com.example.returnmanagement.model.ReturnRecord;
@@ -40,11 +41,19 @@ public class ReturnRecordService {
 		return mapToReturnRecordResponse(returnRecord);
 	}
 	
-	public List<ReturnRecordResponse> findReturnRecords(){
-		List<ReturnRecordResponse> records = returnRecordRepository.findAll()
-				                             .stream()
-				                             .map(returnRecord ->mapToReturnRecordResponse(returnRecord))
-				                             .toList();
+	public List<ReturnRecordResponse> findReturnRecords(ReturnRecordStatus status){
+		List<ReturnRecordResponse> records = new ArrayList<>();
+		if(status== null) {
+			 records = returnRecordRepository.findAll()
+                     .stream()
+                     .map(returnRecord ->mapToReturnRecordResponse(returnRecord))
+                     .toList();
+		}else {
+			 records = returnRecordRepository.findByStatus(status)
+					  .stream()
+					  .map(returnRecord ->mapToReturnRecordResponse(returnRecord))
+					  .toList();
+		}
 		return records;
 	}
 	

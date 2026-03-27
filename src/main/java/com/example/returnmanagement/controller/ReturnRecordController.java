@@ -9,10 +9,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.returnmanagement.dto.CreateReturnRecordRequest;
 import com.example.returnmanagement.dto.ReturnRecordResponse;
+import com.example.returnmanagement.enums.ReturnRecordStatus;
 import com.example.returnmanagement.service.ReturnRecordService;
 
 import jakarta.validation.Valid;
@@ -40,9 +42,11 @@ public class ReturnRecordController {
 		
 	}
 	@GetMapping
-	public ResponseEntity<List<ReturnRecordResponse>> getAllReturnRecords(){
+	public ResponseEntity<List<ReturnRecordResponse>> getAllReturnRecords(
+			@RequestParam(required = false) ReturnRecordStatus status
+			){
 		
-		return ResponseEntity.status(HttpStatus.OK).body(this.returnRecordService.findReturnRecords());
+		return ResponseEntity.status(HttpStatus.OK).body(this.returnRecordService.findReturnRecords(status));
 	
 	}
 
