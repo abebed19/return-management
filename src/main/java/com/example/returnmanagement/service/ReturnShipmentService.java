@@ -31,15 +31,12 @@ public class ReturnShipmentService {
 
 	public ReturnShipmentDto createReturnShipment(Long returnRecordId, CreateReturnShipmentDto shipmentDto) {
 		
-		
 		  ReturnRecord returnRecord = returnRecordRepository.findById(returnRecordId)
                   .orElseThrow(()-> new ReturnRecordNotFound("Return record with id "+ returnRecordId+" not found"));
-		  ReturnShipment returnShipment = returnShipmentMapper.createReturnShipmentDtoToEntity(shipmentDto);
+		  ReturnShipment returnShipment = returnShipmentMapper.toEntity(shipmentDto);
 		  returnShipment.setReturnRecord(returnRecord);
 		  ReturnShipment saved = returnShipmentRepository.save(returnShipment);
-		  return returnShipmentMapper.responseReturnShipmentEntityToDto(saved);
-		  
-		  
+		  return returnShipmentMapper.toDto(saved);
 		  
 	}
 	

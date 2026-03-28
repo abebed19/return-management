@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.returnmanagement.dto.AddressDto;
 import com.example.returnmanagement.dto.CreateReturnRecordRequest;
-import com.example.returnmanagement.dto.CreateReturnShipmentDto;
 import com.example.returnmanagement.dto.ReplacementOrderDto;
 import com.example.returnmanagement.dto.ReturnRecordResponse;
 import com.example.returnmanagement.dto.ReturnShipmentDto;

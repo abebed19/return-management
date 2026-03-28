@@ -11,7 +11,7 @@ public class ReturnShipmentMapper {
 	
 	
 	
-	public  ReturnShipment createReturnShipmentDtoToEntity(CreateReturnShipmentDto shipmentDto) {
+	public  ReturnShipment toEntity(CreateReturnShipmentDto shipmentDto) {
     	ReturnShipment returnShipment = new ReturnShipment();
     	returnShipment.setTrackingNumber(shipmentDto.trackingNumber());
     	returnShipment.setCarrier(shipmentDto.carrier());
@@ -21,7 +21,7 @@ public class ReturnShipmentMapper {
     	return returnShipment;
     }
 	
-	public ReturnShipmentDto responseReturnShipmentEntityToDto(ReturnShipment returnshipment) {
+	public ReturnShipmentDto toDto(ReturnShipment returnshipment) {
 		return new ReturnShipmentDto(
 				returnshipment.getId(),
 				returnshipment.getTrackingNumber(),
