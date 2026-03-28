@@ -69,13 +69,6 @@ public class ReturnRecordService {
 		return mapToReturnRecordResponse(returnRecordRepository.save(old));
 	}
 	
-	public ReturnShipmentDto createReturnShipment(Long returnRecordId, CreateReturnShipmentDto shipmentDto) {
-		
-		  ReturnShipment returnShipment = createReturnShipmentDtoToEntity(shipmentDto);
-		  ReturnRecord returnRecord = returnRecordRepository.findById(returnRecordId)
-				                      .orElseThrow(()-> new ReturnRecordNotFound("Return record with id "+ returnRecordId+" not found"));
-		  returnShipment.setReturnRecord(returnRecord);
-	}
 	
 	private ReturnRecord mapToEntity(CreateReturnRecordRequest returnRecordRequest) {
 		ReturnRecord rr = new ReturnRecord();
@@ -167,14 +160,6 @@ public class ReturnRecordService {
     		  
     }
     
-    public ReturnShipment createReturnShipmentDtoToEntity(CreateReturnShipmentDto shipmentDto) {
-    	ReturnShipment returnShipment = new ReturnShipment();
-    	returnShipment.setTrackingNumber(shipmentDto.trackingNumber());
-    	returnShipment.setCarrier(shipmentDto.carrier());
-    	returnShipment.setQuantity(shipmentDto.quantity());
-    	returnShipment.setDeliveredAt(shipmentDto.deliveredAt());
-    	returnShipment.setStatus(shipmentDto.status());
-    	return returnShipment;
-    }
+    
     
 }
