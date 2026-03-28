@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.returnmanagement.dto.AddressDto;
 import com.example.returnmanagement.dto.CreateReturnRecordRequest;
+import com.example.returnmanagement.dto.CreateReturnShipmentDto;
 import com.example.returnmanagement.dto.ReplacementOrderDto;
 import com.example.returnmanagement.dto.ReturnRecordResponse;
 import com.example.returnmanagement.dto.ReturnShipmentDto;
@@ -65,7 +66,15 @@ public class ReturnRecordService {
 		old.setReturnAuthorizationNumber(forUpdate.getReturnAuthorizationNumber());
 		old.setReturnedQuantity(forUpdate.getReturnedQuantity());
 		
-		return mapToReturnRecordResponse(returnRecordRepository.save(old))
+		return mapToReturnRecordResponse(returnRecordRepository.save(old));
+	}
+	
+	public ReturnShipmentDto createReturnShipment(Long returnRecordId, CreateReturnShipmentDto shipmentDto) {
+		
+		  ReturnShipment returnShipment = createReturnShipmentDtoToEntity(shipmentDto);
+		  ReturnRecord returnRecord = returnRecordRepository.findById(returnRecordId)
+				                      .orElseThrow(()-> new ReturnRecordNotFound("Return record with id "+ returnRecordId+" not found"));
+		  returnShipment.setReturnRecord(returnRecord);
 	}
 	
 	private ReturnRecord mapToEntity(CreateReturnRecordRequest returnRecordRequest) {
@@ -133,6 +142,7 @@ public class ReturnRecordService {
   
     	for(ReturnShipment shipment : shipmentEntity) {
     		returnshipments.add(new ReturnShipmentDto(
+    				shipment.getId(),
     				shipment.getTrackingNumber(),
     				shipment.getCarrier(),
     				shipment.getQuantity(),
@@ -156,4 +166,15 @@ public class ReturnRecordService {
     		    toAddressDto(order.getToAddress()));
     		  
     }
+    
+    public ReturnShipment createReturnShipmentDtoToEntity(CreateReturnShipmentDto shipmentDto) {
+    	ReturnShipment returnShipment = new ReturnShipment();
+    	returnShipment.setTrackingNumber(shipmentDto.trackingNumber());
+    	returnShipment.setCarrier(shipmentDto.carrier());
+    	returnShipment.setQuantity(shipmentDto.quantity());
+    	returnShipment.setDeliveredAt(shipmentDto.deliveredAt());
+    	returnShipment.setStatus(shipmentDto.status());
+    	return returnShipment;
+    }
+    
 }
