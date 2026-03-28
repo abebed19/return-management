@@ -3,10 +3,12 @@ package com.example.returnmanagement.mapper;
 import org.springframework.stereotype.Component;
 
 import com.example.returnmanagement.dto.CreateReturnShipmentDto;
+import com.example.returnmanagement.dto.ReturnShipmentDto;
 import com.example.returnmanagement.model.ReturnShipment;
 
 @Component
 public class ReturnShipmentMapper {
+	
 	
 	
 	public  ReturnShipment createReturnShipmentDtoToEntity(CreateReturnShipmentDto shipmentDto) {
@@ -18,5 +20,17 @@ public class ReturnShipmentMapper {
     	returnShipment.setStatus(shipmentDto.status());
     	return returnShipment;
     }
+	
+	public ReturnShipmentDto responseReturnShipmentEntityToDto(ReturnShipment returnshipment) {
+		return new ReturnShipmentDto(
+				returnshipment.getId(),
+				returnshipment.getTrackingNumber(),
+				returnshipment.getCarrier(),
+				returnshipment.getQuantity(),
+				returnshipment.getShippedAt(),
+				returnshipment.getDeliveredAt(),
+				returnshipment.getStatus()
+				);
+	}
 
 }
