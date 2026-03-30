@@ -36,9 +36,12 @@ public class ReturnShipmentController {
 		
 	}
 	@GetMapping
-	public ResponseEntity<List<ReturnShipmentDto>> getReturnShipment(@PathVariable Long returnId){
+	public ResponseEntity<List<ReturnShipmentDto>> getShipmentsByReturnId(@PathVariable Long returnId){
 		return ResponseEntity.ok(returnShipmentService.getReturnShipments(returnId));
 	}
-	
+	@GetMapping("/{shipmentId}")
+	public ResponseEntity<ReturnShipmentDto> getShipment(@PathVariable Long returnId, @PathVariable Long shipmentId){
+		return ResponseEntity.ok(returnShipmentService.getShipment(shipmentId, returnId));
+	}
 
 }

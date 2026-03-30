@@ -47,10 +47,16 @@ public class ReturnShipmentService {
 		ReturnRecord returnRecord =   returnRecordRepository.findById(returnId)
                 .orElseThrow(()-> new ReturnRecordNotFound("Return record with id "+ returnId+" not found"));
 		
-	  return	returnShipmentRepository.findByReturnRecord(returnRecord)
+	    return	returnShipmentRepository.findByReturnRecord(returnRecord)
 	                            .stream()
 	                            .map(returnShipmentMapper::toDto)
 	                            .toList();
+	}
+	
+	public ReturnShipmentDto getShipment(Long shipmentId, Long returnId) {
+		ReturnRecord returnRecord =   returnRecordRepository.findById(returnId)
+                .orElseThrow(()-> new ReturnRecordNotFound("Return record with id "+ returnId+" not found and doesn't contain shipments"));
+		return returnShipmentMapper.toDto(returnShipmentRepository.findByIdAndReturnRecord(shipmentId, returnId));
 	}
 	
 

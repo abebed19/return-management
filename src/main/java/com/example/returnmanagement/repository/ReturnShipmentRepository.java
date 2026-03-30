@@ -10,5 +10,6 @@ import com.example.returnmanagement.model.ReturnShipment;
 public interface ReturnShipmentRepository extends JpaRepository<ReturnShipment, Long> {
 	
 	public List<ReturnShipment> findByReturnRecord(ReturnRecord returnRecord);
+	public ReturnShipment findByIdAndReturnRecord(Long shipmentId, Long returnId);
 
 }
