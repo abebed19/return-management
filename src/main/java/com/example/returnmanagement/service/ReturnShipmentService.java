@@ -56,7 +56,11 @@ public class ReturnShipmentService {
 	public ReturnShipmentDto getShipment(Long shipmentId, Long returnId) {
 		ReturnRecord returnRecord =   returnRecordRepository.findById(returnId)
                 .orElseThrow(()-> new ReturnRecordNotFound("Return record with id "+ returnId+" not found and doesn't contain shipments"));
-		return returnShipmentMapper.toDto(returnShipmentRepository.findByIdAndReturnRecord(shipmentId, returnRecord));
+
+		return returnShipmentMapper.toDto(
+				returnShipmentRepository.findByIdAndReturnRecord(shipmentId, returnRecord)
+				.orElseThrow(()->new ReturnRecordNotFound("Return shipment with id"+ shipmentId+" doesnt exist"))
+				);
 	}
 	
 
