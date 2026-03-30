@@ -1,5 +1,7 @@
 package com.example.returnmanagement.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.example.returnmanagement.dto.CreateReturnShipmentDto;
@@ -38,6 +40,17 @@ public class ReturnShipmentService {
 		  ReturnShipment saved = returnShipmentRepository.save(returnShipment);
 		  return returnShipmentMapper.toDto(saved);
 		  
+	}
+	
+	public List<ReturnShipmentDto> getAllReturnShipment(Long returnId){
+		
+		ReturnRecord returnRecord =   returnRecordRepository.findById(returnId)
+                .orElseThrow(()-> new ReturnRecordNotFound("Return record with id "+ returnId+" not found"));
+		
+	  return	returnShipmentRepository.findByReturnRecord(returnRecord)
+	                            .stream()
+	                            .map(shipment ->returnShipmentMapper.toDto(shipment))
+	                            .toList();
 	}
 	
 
