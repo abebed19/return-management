@@ -41,7 +41,7 @@ public class ReturnShipmentController {
 	}
 	@GetMapping("/{shipmentId}")
 	public ResponseEntity<ReturnShipmentDto> getShipment(@PathVariable("returnId") Long returnId, @PathVariable("shipmentId") Long shipmentId){
-		return ResponseEntity.ok(returnShipmentService.getShipment(shipmentId, returnId));
+		return ResponseEntity.ok(returnShipmentService.getShipment(returnId,shipmentId));
 	}
 
 }

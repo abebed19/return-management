@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.example.returnmanagement.dto.CreateReturnShipmentDto;
 import com.example.returnmanagement.dto.ReturnShipmentDto;
 import com.example.returnmanagement.exception.ReturnRecordNotFound;
+import com.example.returnmanagement.exception.ReturnShipmentNotFoundException;
 import com.example.returnmanagement.mapper.ReturnShipmentMapper;
 import com.example.returnmanagement.model.ReturnRecord;
 import com.example.returnmanagement.model.ReturnShipment;
@@ -53,13 +54,13 @@ public class ReturnShipmentService {
 	                            .toList();
 	}
 	
-	public ReturnShipmentDto getShipment(Long shipmentId, Long returnId) {
+	public ReturnShipmentDto getShipment(Long returnId, Long shipmentId ) {
 		ReturnRecord returnRecord =   returnRecordRepository.findById(returnId)
-                .orElseThrow(()-> new ReturnRecordNotFound("Return record with id "+ returnId+" not found and doesn't contain shipments"));
+                .orElseThrow(()-> new ReturnRecordNotFound("Return record with id "+ returnId+" not found "));
 
 		return returnShipmentMapper.toDto(
 				returnShipmentRepository.findByIdAndReturnRecord(shipmentId, returnRecord)
-				.orElseThrow(()->new ReturnRecordNotFound("Return shipment with id"+ shipmentId+" doesnt exist"))
+				.orElseThrow(()->new ReturnShipmentNotFoundException("Return shipment with id"+ shipmentId+" doesnt exist"))
 				);
 	}
 	
