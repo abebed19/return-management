@@ -60,8 +60,25 @@ public class ReturnShipmentService {
 
 		return returnShipmentMapper.toDto(
 				returnShipmentRepository.findByIdAndReturnRecord(shipmentId, returnRecord)
-				.orElseThrow(()->new ReturnShipmentNotFoundException("Return shipment with id"+ shipmentId+" doesnt exist"))
+				.orElseThrow(()->new ReturnShipmentNotFoundException("Return shipment with id"+ shipmentId+" not found  for return record "+ returnId))
 				);
+		
+	}
+	
+	public ReturnShipmentDto updateShipment(Long returnId, Long shipmentId,CreateReturnShipmentDto shipmentDto) {
+		ReturnRecord returnRecord =   returnRecordRepository.findById(returnId)
+                .orElseThrow(()-> new ReturnRecordNotFound("Return record with id "+ returnId+" not found "));
+		ReturnShipment returnShipment = returnShipmentRepository.findByIdAndReturnRecord(shipmentId, returnRecord)
+				.orElseThrow(()->new ReturnShipmentNotFoundException("Return shipment with id"+ shipmentId+" not found  for return record "+ returnId));
+		
+		returnShipment.setCarrier(shipmentDto.carrier());
+		returnShipment.setDeliveredAt(shipmentDto.deliveredAt());
+		returnShipment.setQuantity(shipmentDto.quantity());
+		returnShipment.setTrackingNumber(shipmentDto.trackingNumber());
+		returnShipment.setStatus(shipmentDto.status());
+		returnShipment.setReturnRecord(returnRecord);
+		
+		return returnShipmentMapper.toDto(returnShipmentRepository.save(returnShipment));
 	}
 	
 
