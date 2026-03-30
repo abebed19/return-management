@@ -83,5 +83,14 @@ public class ReturnShipmentService {
 		return returnShipmentMapper.toDto(returnShipmentRepository.save(returnShipment));
 	}
 	
+	public void deleteShipment(Long returnId, Long shipmentId) {
+		ReturnRecord returnRecord =   returnRecordRepository.findById(returnId)
+                .orElseThrow(()-> new ReturnRecordNotFound("Return record with id "+ returnId+" not found "));
+		ReturnShipment returnShipment = returnShipmentRepository.findByIdAndReturnRecord(shipmentId, returnRecord)
+				.orElseThrow(()->new ReturnShipmentNotFoundException("Return shipment with id " + shipmentId + " not found "));
+		returnShipmentRepository.delete(returnShipment);
+		
+	
+	}
 
 }
