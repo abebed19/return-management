@@ -1,7 +1,10 @@
 package com.example.returnmanagement.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,6 +34,10 @@ public class ReturnShipmentController {
 	public ResponseEntity<ReturnShipmentDto> createShipment(@PathVariable Long returnId,@Valid @RequestBody CreateReturnShipmentDto shipmentDto){
 		return ResponseEntity.status(HttpStatus.CREATED).body(returnShipmentService.createReturnShipment(returnId, shipmentDto));
 		
+	}
+	@GetMapping
+	public ResponseEntity<List<ReturnShipmentDto>> getReturnShipment(@PathVariable Long returnId){
+		return ResponseEntity.ok(returnShipmentService.getReturnShipments(returnId));
 	}
 	
 

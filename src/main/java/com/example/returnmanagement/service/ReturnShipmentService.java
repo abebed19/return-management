@@ -42,14 +42,14 @@ public class ReturnShipmentService {
 		  
 	}
 	
-	public List<ReturnShipmentDto> getAllReturnShipment(Long returnId){
+	public List<ReturnShipmentDto> getReturnShipments(Long returnId){
 		
 		ReturnRecord returnRecord =   returnRecordRepository.findById(returnId)
                 .orElseThrow(()-> new ReturnRecordNotFound("Return record with id "+ returnId+" not found"));
 		
 	  return	returnShipmentRepository.findByReturnRecord(returnRecord)
 	                            .stream()
-	                            .map(shipment ->returnShipmentMapper.toDto(shipment))
+	                            .map(returnShipmentMapper::toDto)
 	                            .toList();
 	}
 	
