@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,6 +53,16 @@ public class ReturnShipmentController {
 			@Valid @RequestBody CreateReturnShipmentDto shipmentDto ){
 		
 		return ResponseEntity.ok(returnShipmentService.updateShipment(returnId,shipmentId,shipmentDto));
+	}
+	
+	@DeleteMapping("/{shipmentId}")
+	public ResponseEntity<Void> deleteShipment(
+			@PathVariable("returnId") Long returnId, 
+			@PathVariable("shipmentId") Long shipmentId)
+	{
+		returnShipmentService.deleteShipment(returnId, shipmentId);
+		return ResponseEntity.noContent().build();
+		
 	}
 
 
