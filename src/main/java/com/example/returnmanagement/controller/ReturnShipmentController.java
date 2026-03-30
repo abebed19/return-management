@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,5 +44,15 @@ public class ReturnShipmentController {
 	public ResponseEntity<ReturnShipmentDto> getShipment(@PathVariable("returnId") Long returnId, @PathVariable("shipmentId") Long shipmentId){
 		return ResponseEntity.ok(returnShipmentService.getShipment(returnId,shipmentId));
 	}
+	
+	@PutMapping("/{shipmentId}")
+	public ResponseEntity<ReturnShipmentDto> updateShupment(
+			@PathVariable("returnId") Long returnId, 
+			@PathVariable("shipmentId") Long shipmentId,
+			@Valid @RequestBody CreateReturnShipmentDto shipmentDto ){
+		
+		return ResponseEntity.ok(returnShipmentService.updateShipment(returnId,shipmentId,shipmentDto));
+	}
+
 
 }

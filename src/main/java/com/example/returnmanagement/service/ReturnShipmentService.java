@@ -1,11 +1,13 @@
 package com.example.returnmanagement.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.example.returnmanagement.dto.CreateReturnShipmentDto;
 import com.example.returnmanagement.dto.ReturnShipmentDto;
+import com.example.returnmanagement.enums.ShipmentStatus;
 import com.example.returnmanagement.exception.ReturnRecordNotFound;
 import com.example.returnmanagement.exception.ReturnShipmentNotFoundException;
 import com.example.returnmanagement.mapper.ReturnShipmentMapper;
@@ -69,14 +71,14 @@ public class ReturnShipmentService {
 		ReturnRecord returnRecord =   returnRecordRepository.findById(returnId)
                 .orElseThrow(()-> new ReturnRecordNotFound("Return record with id "+ returnId+" not found "));
 		ReturnShipment returnShipment = returnShipmentRepository.findByIdAndReturnRecord(shipmentId, returnRecord)
-				.orElseThrow(()->new ReturnShipmentNotFoundException("Return shipment with id"+ shipmentId+" not found  for return record "+ returnId));
+				.orElseThrow(()->new ReturnShipmentNotFoundException("Return shipment with id " + shipmentId + " not found for return record " + returnId));
 		
 		returnShipment.setCarrier(shipmentDto.carrier());
-		returnShipment.setDeliveredAt(shipmentDto.deliveredAt());
 		returnShipment.setQuantity(shipmentDto.quantity());
 		returnShipment.setTrackingNumber(shipmentDto.trackingNumber());
 		returnShipment.setStatus(shipmentDto.status());
-		returnShipment.setReturnRecord(returnRecord);
+		if(returnShipment.getStatus() == ShipmentStatus.DELIVERED && returnShipment.getDeliveredAt() == null)
+			returnShipment.setDeliveredAt(LocalDateTime.now());
 		
 		return returnShipmentMapper.toDto(returnShipmentRepository.save(returnShipment));
 	}
