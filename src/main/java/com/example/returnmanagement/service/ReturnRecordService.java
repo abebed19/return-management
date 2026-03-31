@@ -7,12 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.example.returnmanagement.dto.AddressDto;
 import com.example.returnmanagement.dto.CreateReturnRecordRequest;
-import com.example.returnmanagement.dto.ReplacementOrderDto;
 import com.example.returnmanagement.dto.ReturnRecordResponse;
 import com.example.returnmanagement.dto.ReturnShipmentDto;
 import com.example.returnmanagement.enums.ReturnRecordStatus;
 import com.example.returnmanagement.model.Address;
-import com.example.returnmanagement.model.ReplacementOrder;
 import com.example.returnmanagement.model.ReturnRecord;
 import com.example.returnmanagement.model.ReturnShipment;
 import com.example.returnmanagement.repository.ReturnRecordRepository;
@@ -146,18 +144,7 @@ public class ReturnRecordService {
     }
     
     
-    private ReplacementOrderDto toReplacementOrderDto(ReplacementOrder order) {
-    	
-      return new ReplacementOrderDto(
-    		    order.getId(),
-    		    order.getReplacementZoroOrderNumber(),
-    		    order.getProcessedAt(),
-    		    order.getReplacedQuantity(),
-    		    order.getStatus(),
-    		    toAddressDto(order.getFromAddress()),
-    		    toAddressDto(order.getToAddress()));
-    		  
-    }
+
     
     
     
