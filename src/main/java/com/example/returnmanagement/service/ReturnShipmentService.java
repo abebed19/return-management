@@ -77,9 +77,10 @@ public class ReturnShipmentService {
 		returnShipment.setQuantity(shipmentDto.quantity());
 		returnShipment.setTrackingNumber(shipmentDto.trackingNumber());
 		returnShipment.setStatus(shipmentDto.status());
-		if(returnShipment.getStatus() == ShipmentStatus.DELIVERED && returnShipment.getDeliveredAt() == null)
+		if(returnShipment.getStatus() == ShipmentStatus.DELIVERED )
 			returnShipment.setDeliveredAt(LocalDateTime.now());
-		
+		else 
+			returnShipment.setDeliveredAt(null);
 		return returnShipmentMapper.toDto(returnShipmentRepository.save(returnShipment));
 	}
 	
